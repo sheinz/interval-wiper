@@ -6,7 +6,11 @@
 #include "CControl.h"
 #include "avr/wdt.h"
 
-// HFUSE=0x89   // WDTON = 0, CKOPT=0 (Increase oscillator amplitude) 
+FUSES =
+{
+   .low = (FUSE_SUT0 & FUSE_CKSEL3 & FUSE_CKSEL1 & FUSE_CKSEL0),
+   .high = (FUSE_WDTON & FUSE_SPIEN & FUSE_CKOPT & FUSE_BOOTSZ1 & FUSE_BOOTSZ0),
+};
 
 CControl Control;
 
