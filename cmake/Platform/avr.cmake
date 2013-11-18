@@ -72,6 +72,11 @@ function(GENERATE_AVR_FIRMWARE INPUT_NAME)
     set_target_properties(${INPUT_NAME} PROPERTIES
         LINK_FLAGS "${AVR_COMPILE_FLAGS} ${AVR_LINK_FLAGS} -mmcu=${INPUT_MCU} -DF_CPU=${INPUT_FCPU}")
 
+    add_custom_command(TARGET ${INPUT_NAME}
+                       POST_BUILD
+                       COMMAND /usr/bin/${CMAKE_SYSTEM_NAME}-size --mcu=${INPUT_MCU} --format=avr  ${PROJECT_NAME}
+                       VERBATIM)
+
     setup_programmer(${INPUT_MCU})
 endfunction()
 
